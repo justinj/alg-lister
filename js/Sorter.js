@@ -18,8 +18,30 @@ Sorter = {
         "postmove":postmove
     }
   },
+  areSame: function(alg1, alg2) {
+    //also make this true if they are transformations of each other
+    //ex F == y R
+    return alg1.alg == alg2.alg;
+  },
   //sort the list of algs by the qtm length of the entry "alg"
   sortAlgs: function(algList) {
-    return algList.sort(function(alg1,alg2) {return Algorithm.qtmLength(alg1.alg)-Algorithm.qtmLength(alg2.alg)});
+    return algList.sort(function(alg1,alg2) {
+      var a = Algorithm.qtmLength(alg1.alg);
+      var b = Algorithm.qtmLength(alg2.alg);
+      if (a == b)
+        return alg1.alg.localeCompare(alg2.alg);
+      return a-b;
+    });
+  },
+  removeDuplicates: function(sortedAlgList) {
+    var i = 0; 
+    while (i < sortedAlgList.length - 1) {
+      console.log(sortedAlgList[i],sortedAlgList[i+1],Sorter.areSame(sortedAlgList[i],sortedAlgList[i+1]));
+      if (Sorter.areSame(sortedAlgList[i], sortedAlgList[i+1])) {
+        sortedAlgList.splice(i,1);
+      } else {
+        i++;
+      }
+    }
   }
 }
