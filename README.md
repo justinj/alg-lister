@@ -7,3 +7,4 @@ TODO
 ====
 
 * Remove algs that are y-rotations of each other
+* Headings for each alg length
