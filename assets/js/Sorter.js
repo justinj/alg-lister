@@ -21,7 +21,7 @@ Sorter = {
   areSame: function(alg1, alg2) {
     //also make this true if they are transformations of each other
     //ex F == y R
-    return alg1.alg == alg2.alg;
+    return Comparer.areSameAlg(alg1.alg, alg2.alg);
   },
   //sort the list of algs by the qtm length of the entry "alg"
   sortAlgs: function(algList) {
@@ -36,7 +36,6 @@ Sorter = {
   removeDuplicates: function(sortedAlgList) {
     var i = 0; 
     while (i < sortedAlgList.length - 1) {
-      console.log(sortedAlgList[i],sortedAlgList[i+1],Sorter.areSame(sortedAlgList[i],sortedAlgList[i+1]));
       if (Sorter.areSame(sortedAlgList[i], sortedAlgList[i+1])) {
         sortedAlgList.splice(i,1);
       } else {
