@@ -1,8 +1,11 @@
 Comparer = {
   areSameAlg: function(first, second) {
-    var yRotations = Translator.yRotations(first);
+    return Comparer.allRotationsWithoutY(first).indexOf(second) != -1;
+  },
+  allRotationsWithoutY: function(alg) {
+    var yRotations = Translator.yRotations(alg);
     var possibleAlgs = yRotations.map(Comparer.removeLeadingY);
-    return possibleAlgs.indexOf(second) != -1;
+    return possibleAlgs;
   },
   removeLeadingY: function(alg) {
     var moves = Algorithm.splitAlg(alg);

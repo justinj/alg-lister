@@ -58,8 +58,8 @@ Translator = {
   fixMove: function(causingMove, move)
   {
     var face = move[0];
-    var suffix = move.substring(1)
-      var causingMoveFace = causingMove[0];
+    var suffix = move.substring(1);
+    var causingMoveFace = causingMove[0];
     var causingMoveSuffix = causingMove.substring(1);
 
     if (causingMoveSuffix == "'")

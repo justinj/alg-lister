@@ -12,26 +12,28 @@ Sorter = {
       postmove += moves[moves.length-1] + " ";
       moves.pop();
     }
-    return {
-      "premove":premove,
-        "alg":moves.join(" "),
-        "postmove":postmove
-    }
+    return moves.join(" ");
   },
   areSame: function(alg1, alg2) {
-    //also make this true if they are transformations of each other
-    //ex F == y R
-    return Comparer.areSameAlg(alg1.alg, alg2.alg);
+    return alg1 === alg2;
   },
-  //sort the list of algs by the qtm length of the entry "alg"
-  sortAlgs: function(algList) {
-    return algList.sort(function(alg1,alg2) {
-      var a = Algorithm.qtmLength(alg1.alg);
-      var b = Algorithm.qtmLength(alg2.alg);
-      if (a == b)
-        return alg1.alg.localeCompare(alg2.alg);
-      return a-b;
+  fixAlgList: function(algList) {
+    var algs = algList.map(Sorter.normalize);
+
+    algs = algs.sort(function(alg1,alg2) {
+      var alg1len = Algorithm.qtmLength(alg1);
+      var alg2len = Algorithm.qtmLength(alg2);
+
+      if (alg1len == alg2len) {
+        return alg1.localeCompare(alg2);
+      }
+
+      return alg1len - alg2len;
     });
+    
+    Sorter.removeDuplicates(algs);
+
+    return algs;
   },
   removeDuplicates: function(sortedAlgList) {
     var i = 0; 
@@ -40,6 +42,14 @@ Sorter = {
         sortedAlgList.splice(i,1);
       } else {
         i++;
+      }
+    }
+  },
+  normalize: function(alg) {
+    var possibilities = Comparer.allRotationsWithoutY(alg);
+    for (var i = 0; i < possibilities.length; i++) {
+      if (possibilities[i][0] == "R") {
+        return possibilities[i];
       }
     }
   }
