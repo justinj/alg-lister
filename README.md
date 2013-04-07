@@ -6,5 +6,4 @@ Tool for RobYau/Brest that takes a list of algs, strips any AUF from the beginni
 TODO
 ====
 
-* Remove algs that are y-rotations of each other
 * Headings for each alg length
