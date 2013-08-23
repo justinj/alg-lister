@@ -47,8 +47,12 @@ Sorter = {
   },
   normalize: function(alg) {
     var possibilities = Comparer.allRotationsWithoutY(alg);
+    var firstNonDMove = 0;
     for (var i = 0; i < possibilities.length; i++) {
-      if (possibilities[i][0] == "R") {
+      firstNonDMove = 0;
+      var moves = possibilities[i].split(" ");
+      while (moves[firstNonDMove][0] == "D") { firstNonDMove += 1; }
+      if (moves[firstNonDMove][0] == "R") {
         return possibilities[i];
       }
     }

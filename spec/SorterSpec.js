@@ -7,5 +7,9 @@ describe("Sorter", function() {
       expect(Sorter.normalize("B")).toEqual("R");
       expect(Sorter.normalize("F U")).toEqual("R U");
     });
+
+    it("rotates so the first non-D move is R", function() {
+      expect(Sorter.normalize("D R")).toEqual("D R");
+    });
   });
 });
