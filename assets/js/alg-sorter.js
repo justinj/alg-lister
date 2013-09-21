@@ -1,7 +1,8 @@
 function go() {
   var algs = $("#alg_box").val().split("\n");
   algs = algs.filter(function(text){return !text.match(/^\s*$/)});
-  algs = algs.filter(function(text){return !text.match(/searching depth/i)});
+  algs = algs.filter(function(text){return text.match(/(R|F|U)/)});
+  algs = algs.filter(function(text){return !text.match(/Using 8/)});
   var fixedAlgs = algs.map(Sorter.stripAuf);
   fixedAlgs = Sorter.fixAlgList(fixedAlgs);
   $("#result").empty();
