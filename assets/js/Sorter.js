@@ -21,12 +21,14 @@ Sorter = {
     return $("#removepreauf")[0].checked;
   },
   areSame: function(alg1, alg2) {
-    return alg1 === alg2;
+    return alg1.normalized === alg2.normalized;
   },
   fixAlgList: function(algList) {
     var algs = algList.map(Sorter.normalize);
 
     algs = algs.sort(function(alg1,alg2) {
+      alg1 = alg1.normalized;
+      alg2 = alg2.normalized;
       var alg1len = Algorithm.qtmLength(alg1);
       var alg2len = Algorithm.qtmLength(alg2);
 
@@ -36,10 +38,10 @@ Sorter = {
 
       return alg1len - alg2len;
     });
-    
+
     Sorter.removeDuplicates(algs);
 
-    return algs;
+    return algs.map(function(alg) { return alg.original });
   },
   removeDuplicates: function(sortedAlgList) {
     var i = 0; 
@@ -59,7 +61,7 @@ Sorter = {
       var moves = possibilities[i].split(" ");
       while (moves[firstNonYAxisMove][0] == "U" || moves[firstNonYAxisMove][0] == "D") { firstNonYAxisMove += 1; }
       if (moves[firstNonYAxisMove][0] == "R") {
-        return possibilities[i];
+        return { original: alg, normalized: possibilities[i] };
       }
     }
   }
