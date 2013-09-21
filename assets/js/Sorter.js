@@ -2,6 +2,9 @@ Sorter = {
   stripAuf: function(alg)
   {
     var moves = Algorithm.splitAlg(alg);
+    if (!Sorter.shouldStrip()) {
+      return moves.join(" ");
+    }
     var premove = "";
     var postmove = "";
     while (moves[0][0]=="U") {
@@ -13,6 +16,9 @@ Sorter = {
       moves.pop();
     }
     return moves.join(" ");
+  },
+  shouldStrip: function() {
+    return $("#removepreauf")[0].checked;
   },
   areSame: function(alg1, alg2) {
     return alg1 === alg2;
@@ -47,12 +53,12 @@ Sorter = {
   },
   normalize: function(alg) {
     var possibilities = Comparer.allRotationsWithoutY(alg);
-    var firstNonDMove = 0;
+    var firstNonYAxisMove = 0;
     for (var i = 0; i < possibilities.length; i++) {
-      firstNonDMove = 0;
+      firstNonYAxisMove = 0;
       var moves = possibilities[i].split(" ");
-      while (moves[firstNonDMove][0] == "D") { firstNonDMove += 1; }
-      if (moves[firstNonDMove][0] == "R") {
+      while (moves[firstNonYAxisMove][0] == "U" || moves[firstNonYAxisMove][0] == "D") { firstNonYAxisMove += 1; }
+      if (moves[firstNonYAxisMove][0] == "R") {
         return possibilities[i];
       }
     }
