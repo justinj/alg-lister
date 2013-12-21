@@ -1,6 +1,18 @@
 Translator = {
   translations: {
     "U": {
+      "Uw": "Uw",
+      "Dw": "Dw",
+      "Lw": "Bw",
+      "Rw": "Fw",
+      "Fw": "Lw",
+      "Bw": "Rw",
+      "u": "u",
+      "d": "d",
+      "l": "b",
+      "r": "f",
+      "f": "l",
+      "b": "r",
       "U": "U",
       "D": "D",
       "L": "B",
@@ -9,6 +21,18 @@ Translator = {
       "B": "R"
     },
     "D": {
+      "Uw": "Uw",
+      "Dw": "Dw",
+      "Lw": "Fw",
+      "Rw": "Bw",
+      "Fw": "Rw",
+      "Bw": "Lw",
+      "u": "u",
+      "d": "d",
+      "l": "f",
+      "r": "b",
+      "f": "r",
+      "b": "l",
       "U": "U",
       "D": "D",
       "L": "F",
@@ -17,6 +41,18 @@ Translator = {
       "B": "L"
     },
     "F": {
+      "Uw": "Rw",
+      "Dw": "Lw",
+      "Lw": "Uw",
+      "Rw": "Dw",
+      "Fw": "Fw",
+      "Bw": "Bw",
+      "u": "r",
+      "d": "l",
+      "l": "u",
+      "r": "d",
+      "f": "f",
+      "b": "b",
       "U": "R",
       "D": "L",
       "L": "U",
@@ -25,6 +61,18 @@ Translator = {
       "B": "B"
     },
     "B": {
+      "Uw": "Lw",
+      "Dw": "Rw",
+      "Lw": "Dw",
+      "Rw": "Uw",
+      "Fw": "Fw",
+      "Bw": "Bw",
+      "u": "l",
+      "d": "r",
+      "l": "d",
+      "r": "u",
+      "f": "f",
+      "b": "b",
       "U": "L",
       "D": "R",
       "L": "D",
@@ -33,6 +81,18 @@ Translator = {
       "B": "B"
     },
     "R": {
+      "Uw": "Bw",
+      "Dw": "Fw",
+      "Lw": "Lw",
+      "Rw": "Rw",
+      "Fw": "Uw",
+      "Bw": "Dw",
+      "u": "b",
+      "d": "f",
+      "l": "l",
+      "r": "r",
+      "f": "u",
+      "b": "d",
       "U": "B",
       "D": "F",
       "L": "L",
@@ -41,6 +101,18 @@ Translator = {
       "B": "D"
     },
     "L": {
+      "Uw": "Fw",
+      "Dw": "Bw",
+      "Lw": "Lw",
+      "Rw": "Rw",
+      "Fw": "Dw",
+      "Bw": "Uw",
+      "u": "f",
+      "d": "b",
+      "l": "l",
+      "r": "r",
+      "f": "d",
+      "b": "u",
       "U": "F",
       "D": "B",
       "L": "L",
@@ -55,12 +127,18 @@ Translator = {
     var suffix = move.substring(1);  
     return Algorithm.opposites[face] + suffix;
   },
+  prefixOf: function(move) {
+    return move.substring(0, move.length-1);
+  },
+  suffixOf: function(move) {
+    return move.substring(move.length-1, move.length);
+  },
   fixMove: function(causingMove, move)
   {
-    var face = move[0];
-    var suffix = move.substring(1);
-    var causingMoveFace = causingMove[0];
-    var causingMoveSuffix = causingMove.substring(1);
+    var face = Translator.prefixOf(move);
+    var suffix = Translator.suffixOf(move);
+    var causingMoveFace = Translator.prefixOf(causingMove);
+    var causingMoveSuffix = Translator.suffixOf(causingMove);
 
     if (causingMoveSuffix == "'")
       return Translator.fixMove(causingMove[0] + "2", Translator.fixMove(causingMoveFace, move));

@@ -60,7 +60,7 @@ Sorter = {
       firstNonYAxisMove = 0;
       var moves = possibilities[i].split(" ");
       while (moves[firstNonYAxisMove][0] == "U" || moves[firstNonYAxisMove][0] == "D") { firstNonYAxisMove += 1; }
-      if (moves[firstNonYAxisMove][0] == "R") {
+      if (moves[firstNonYAxisMove][0].toUpperCase() == "R") {
         return { original: alg, normalized: possibilities[i] };
       }
     }
