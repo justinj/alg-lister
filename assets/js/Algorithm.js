@@ -17,14 +17,16 @@ Algorithm = {
     {
       var move = nospaces[0];
       nospaces = nospaces.substring(1);
-      if (nospaces.length != "" && nospaces[0] != "(" && Algorithm.opposites[nospaces[0]] == undefined)
-      {
-        move += nospaces[0];
-        nospaces = nospaces.substring(1);
-      }
+      while (nospaces.length != "" && nospaces[0] != "(" && Algorithm.opposites[nospaces[0]] == undefined && !Algorithm.isMoveStarter(nospaces[0])) {
+          move += nospaces[0];
+          nospaces = nospaces.substring(1);
+        }
       moves.push(move);
     }
     return moves;
+  },
+  isMoveStarter: function(char) {
+    return "RLUDFBrludfb".indexOf(char) > -1;
   },
   firstMove: function(alg)
   {
