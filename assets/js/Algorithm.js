@@ -40,7 +40,7 @@ Algorithm = {
     var moves = Algorithm.splitAlg(alg);
     var count = 0;
     $.each(moves,function(index,move){
-      if (move.length>1&&move[1]=="2")
+      if (move.length>1&&move[move.length-1]=="2")
         count+=2;
       else
         count+=1;
